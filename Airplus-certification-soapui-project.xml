@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="4a48f3ad-1b4a-4315-b81d-1648b8057585" activeEnvironment="Default" name="Airplus certification" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testSuite id="253b6e04-bcfa-4adb-ba6e-a3f5372cd277" name="Airplus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="1c3ec1a2-d6be-4f81-a0ab-810e4003a524" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="DEV03" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="httprequest" name="TC#3 / Setup #1 / Request for a Reservation" id="81fc90f8-d38f-4744-89da-1e2a1521d21f"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#3 / Setup #1 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://ips-dev03.payments.goacoustic.com:50443/trx</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>1006817</STO>
+	<CTY>DE</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>EUR</CUR>
+	<NET>10.00</NET>
+	<TAX>0</TAX>
+	<GRS>10.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="a1a7e51a-273a-43eb-8aae-f137f6c5d4d7" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer" id="313e5d97-d99a-44d4-b0ec-fc47404ae138"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#3 / Setup #1 / Request for a Reservation</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#4 / Setup #1 / Cancelling a Reservation #3</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#4 / Setup #1 / Cancelling a Reservation #3" id="4d812d02-8191-477f-9438-e47223666681"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#4 / Setup #1 / Cancelling a Reservation #3" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardVoid</SVC>
+	<XRF>5M7T2XQPQ4D31</XRF>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="0b4533a3-cde3-4977-86b1-36ba8ea51fd6" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#3 / Setup #2 / Request for a Reservation" id="77842457-9ba0-42d3-aa35-14ae8efd1898"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#3 / Setup #2 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>1005388</STO>
+	<CTY>US</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>USD</CUR>
+	<NET>999999.99</NET>
+	<TAX>0</TAX>
+	<GRS>999999.99</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>&lt;BRN>05&lt;/BRN></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#5 / Setup #3 / Request for a Reservation" id="fc182da0-0d7c-4e83-8eb0-d08be7249e3a"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#5 / Setup #3 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>1006941</STO>
+	<CTY>GB</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>GBP</CUR>
+	<NET>15.00</NET>
+	<TAX>0</TAX>
+	<GRS>15.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#8 / Setup #1 / Request for a Reservation" id="8efd7ff4-08be-4ab6-b348-d7b07c28b523"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#8 / Setup #1 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>1006817</STO>
+	<CTY>DE</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>EUR</CUR>
+	<NET>16.00</NET>
+	<TAX>0</TAX>
+	<GRS>16.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 1" id="c7a26cf7-b631-408d-bdc2-d85653187c28"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#8 / Setup #1 / Request for a Reservation</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#9 / Setup #1 / Capture-notification of a pre-authorization #8</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#9 / Setup #1 / Capture-notification of a pre-authorization #8" id="7cbb97c0-a47b-484d-9385-f5fbbdfec6fe"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#9 / Setup #1 / Capture-notification of a pre-authorization #8" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+<SVC>Capture</SVC>
+<PRJ>EHI</PRJ>
+<XRF>8W6DZRTA76D31</XRF>
+<CUR>EUR</CUR>
+<CTY>DE</CTY>
+<NET>16</NET>
+<TAX>0</TAX>
+<GRS>16</GRS>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 2" id="2825a41f-3db6-4a3c-a3a9-f65645d69bac"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#9 / Setup #1 / Capture-notification of a pre-authorization #8</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#10 / Setup #1 / Cancelling a Reservation #9</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#10 / Setup #1 / Cancelling a Reservation #9" id="94507649-8724-4567-9676-893a73ebe560"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#10 / Setup #1 / Cancelling a Reservation #9" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardVoid</SVC>
+	<XRF>NN51H2TJM0D31</XRF>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="d9d4bf52-3acb-462e-8ba0-2b296b26c173" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC11 / Setup #2 / Request for a Reservation" id="bf680966-8ab3-4023-a0d8-86d4651d4483"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC11 / Setup #2 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>1005388</STO>
+	<CTY>US</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>USD</CUR>
+	<NET>12.00</NET>
+	<TAX>0</TAX>
+	<GRS>12.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 3" id="76a28b90-6d95-4609-ae65-e48e4872353a"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC11 / Setup #2 / Request for a Reservation</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#12 / Setup #2 / Cancelling a Reservation #11</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#12 / Setup #2 / Cancelling a Reservation #11" id="86e584eb-1986-44c1-b247-817cd88557db"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#12 / Setup #2 / Cancelling a Reservation #11" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardVoid</SVC>
+	<XRF>65B9MPSQNXD31</XRF>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="7f383049-b809-4906-a934-a31a7bf48679" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#13 / Setup #1 / Request for a Reservation" id="cb3ef18e-e069-4ccc-bf65-531a2571ccb9"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#13 / Setup #1 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>1006817</STO>
+	<CTY>DE</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>EUR</CUR>
+	<NET>5</NET>
+	<TAX>0</TAX>
+	<GRS>5</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="26cb6a82-a6ff-40aa-b46f-013dc77a3002" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#14 / Setup #2 / Request for a Reservation" id="75cbb683-45f0-482f-bdd3-3261a37e20dc"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#14 / Setup #2 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>1005388</STO>
+	<CTY>US</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>USD</CUR>
+	<NET>7</NET>
+	<TAX>0</TAX>
+	<GRS>7</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 4" id="eace8c24-624a-4a9e-9cca-15edc6deda20"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#14 / Setup #2 / Request for a Reservation</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#16 / Setup #2 / Capture-notification of a pre-authorization #14</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#15 / Setup #3 / Request for a Reservation" id="1edaf208-b7b6-46f7-8f87-2e50ccf64651"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#15 / Setup #3 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>1006941</STO>
+	<CTY>GB</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>GBP</CUR>
+	<NET>11.00</NET>
+	<TAX>0</TAX>
+	<GRS>11.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#16 / Setup #2 / Capture-notification of a pre-authorization #14" id="2a2498df-e6bd-4934-b251-d78cb6888cf7"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#16 / Setup #2 / Capture-notification of a pre-authorization #14" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+<SVC>Capture</SVC>
+<PRJ>EHI</PRJ>
+<XRF>A9KHMXQGDGD31</XRF>
+<CUR>USD</CUR>
+<CTY>US</CTY>
+<NET>7</NET>
+<TAX>0</TAX>
+<GRS>7</GRS>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 5" id="965d930c-4c30-4b62-8d94-0658230380db"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#16 / Setup #2 / Capture-notification of a pre-authorization #14</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#17 / Setup #2 / Cancelling a Reservation #16</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#17 / Setup #2 / Cancelling a Reservation #16" id="6064707b-3b59-4a6c-8952-46f031ef4263"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#17 / Setup #2 / Cancelling a Reservation #16" postQueryString="false" mediaType="application/xml" sslKeystore="DEV-03.p12.pfx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#dev}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardVoid</SVC>
+	<XRF>GKFPDV04VPD31</XRF>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="96eae32e-e53f-47ee-9f01-22b6875d627d" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties/></con:testCase><con:properties><con:property><con:name>dev</con:name><con:value>https://ips-dev03.payments.goacoustic.com:50443/trx</con:value></con:property></con:properties></con:testSuite><con:testSuite id="8dbe38bd-8815-4ee5-9ded-9fc6f5a39135" name="Airplus PreProd"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="693e8033-98d9-47bb-b686-8ffc184f7748" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="PreProd" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="httprequest" name="TC#3 / Setup #1 / Request for a Reservation" id="2911892b-0e6d-4736-99f9-b94441640c8c"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#3 / Setup #1 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>AIRPLUSEU</STO>
+	<CTY>DE</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>EUR</CUR>
+	<NET>10.00</NET>
+	<TAX>0</TAX>
+	<GRS>10.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="a1a7e51a-273a-43eb-8aae-f137f6c5d4d7" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer" id="322fef6a-c866-44af-90c1-b2c8feae0226"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#3 / Setup #1 / Request for a Reservation</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#4 / Setup #1 / Cancelling a Reservation #3</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#4 / Setup #1 / Cancelling a Reservation #3" id="b68bba31-5fd7-4bd4-92bf-5ce1a572452b"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#4 / Setup #1 / Cancelling a Reservation #3" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardVoid</SVC>
+	<XRF>116AN6YC20TC5</XRF>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="0b4533a3-cde3-4977-86b1-36ba8ea51fd6" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#3 / Setup #2 / Request for a Reservation" id="012bb4c4-947b-4590-a9ed-0036abb34169"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#3 / Setup #2 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>AIRPLUSUS</STO>
+	<CTY>US</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>USD</CUR>
+	<NET>999.00</NET>
+	<TAX>0</TAX>
+	<GRS>999.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#5 / Setup #3 / Request for a Reservation" id="5e96d18d-7bfd-48d3-801f-2669855d3739"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#5 / Setup #3 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>AIRPLUSGB</STO>
+	<CTY>GB</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>GBP</CUR>
+	<NET>15.00</NET>
+	<TAX>0</TAX>
+	<GRS>15.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#8 / Setup #1 / Request for a Reservation" id="3c762542-aeca-4d2d-930f-61d58e04155c"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#8 / Setup #1 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>AIRPLUSEU</STO>
+	<CTY>DE</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>EUR</CUR>
+	<NET>16.00</NET>
+	<TAX>0</TAX>
+	<GRS>16.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 1" id="001512f1-578d-40c4-8e44-4dee5b8b5689"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#8 / Setup #1 / Request for a Reservation</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#9 / Setup #1 / Capture-notification of a pre-authorization #8</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#9 / Setup #1 / Capture-notification of a pre-authorization #8" id="7ddb1dc3-a173-48d3-a541-2269564471ed"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#9 / Setup #1 / Capture-notification of a pre-authorization #8" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+<SVC>Capture</SVC>
+<PRJ>EHI</PRJ>
+<XRF>16T9F71CCRTC1</XRF>
+<CUR>EUR</CUR>
+<CTY>DE</CTY>
+<NET>16</NET>
+<TAX>0</TAX>
+<GRS>16</GRS>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 2" id="8aa2fc73-ccb6-4c7a-a261-6d5434e9c536"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#9 / Setup #1 / Capture-notification of a pre-authorization #8</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#10 / Setup #1 / Cancelling a Reservation #9</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#10 / Setup #1 / Cancelling a Reservation #9" id="c2220eb3-3b43-4d28-8a00-0a173798d035"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#10 / Setup #1 / Cancelling a Reservation #9" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardVoid</SVC>
+	<XRF>WN0GJLQQBDTC5</XRF>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="d9d4bf52-3acb-462e-8ba0-2b296b26c173" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC11 / Setup #2 / Request for a Reservation" id="d5b6252f-6cbe-4915-9845-8d729e90923c"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC11 / Setup #2 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>AIRPLUSUS</STO>
+	<CTY>US</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>USD</CUR>
+	<NET>12.00</NET>
+	<TAX>0</TAX>
+	<GRS>12.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 3" id="bfa401f2-76cc-4809-8b42-336492dce1bc"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC11 / Setup #2 / Request for a Reservation</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#12 / Setup #2 / Cancelling a Reservation #11</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#12 / Setup #2 / Cancelling a Reservation #11" id="842b1d72-130a-4b7e-bb5a-e77b0b2f3a05"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#12 / Setup #2 / Cancelling a Reservation #11" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardVoid</SVC>
+	<XRF>XDPSJ52MV0TC1</XRF>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="7f383049-b809-4906-a934-a31a7bf48679" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#13 / Setup #1 / Request for a Reservation" id="e3866897-fcea-4309-9479-a2d5ddde8457"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#13 / Setup #1 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>AIRPLUSEU</STO>
+	<CTY>DE</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>EUR</CUR>
+	<NET>5</NET>
+	<TAX>0</TAX>
+	<GRS>5</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="26cb6a82-a6ff-40aa-b46f-013dc77a3002" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#14 / Setup #2 / Request for a Reservation" id="c55f91a5-9083-48ed-8955-d660766658da"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#14 / Setup #2 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>AIRPLUSUS</STO>
+	<CTY>US</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>USD</CUR>
+	<NET>7</NET>
+	<TAX>0</TAX>
+	<GRS>7</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 4" id="0d351391-a63f-4adf-a966-3b708b8ecde1"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#14 / Setup #2 / Request for a Reservation</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#16 / Setup #2 / Capture-notification of a pre-authorization #14</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#15 / Setup #3 / Request for a Reservation" id="908cd3d0-f668-4216-993e-7fbe5de119ce"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#15 / Setup #3 / Request for a Reservation" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>AIRPLUSGB</STO>
+	<CTY>GB</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>GBP</CUR>
+	<NET>11.00</NET>
+	<TAX>0</TAX>
+	<GRS>11.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#16 / Setup #2 / Capture-notification of a pre-authorization #14" id="0e503c66-8f66-464a-b23d-052968bc6c89"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#16 / Setup #2 / Capture-notification of a pre-authorization #14" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+<SVC>Capture</SVC>
+<PRJ>EHI</PRJ>
+<XRF>K8KGT4LBJ8TC5</XRF>
+<CUR>USD</CUR>
+<CTY>US</CTY>
+<NET>7</NET>
+<TAX>0</TAX>
+<GRS>7</GRS>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 5" id="86db69c1-2cff-4ff5-ac47-c3ca687763d9"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#16 / Setup #2 / Capture-notification of a pre-authorization #14</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#17 / Setup #2 / Cancelling a Reservation #16</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#17 / Setup #2 / Cancelling a Reservation #16" id="172ce03b-db25-4a84-9a87-b9ac00d56e2a"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#17 / Setup #2 / Cancelling a Reservation #16" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardVoid</SVC>
+	<XRF>R4X6SZRZ9PTC1</XRF>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="96eae32e-e53f-47ee-9f01-22b6875d627d" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#18 / Setup #3 / Verification - not supported" id="dbfc4eea-fb98-4cc5-b070-5e14e133221f"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#18 / Setup #3 / Verification - not supported" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardVerify</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>AIRPLUSGB</STO>
+	<CTY>GB</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>GBP</CUR>
+	<NET>11.00</NET>
+	<TAX>0</TAX>
+	<GRS>11.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#19 / Setup #3 / CardAuthCap - not supported" id="7244310c-402e-4929-b924-c45495bd8bdf"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#19 / Setup #3 / CardAuthCap - not supported" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthCap</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>AIRPLUSGB</STO>
+	<CTY>GB</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>GBP</CUR>
+	<NET>11.00</NET>
+	<TAX>0</TAX>
+	<GRS>11.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>&lt;BRC>986&lt;/BRC></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="TC#20 / Setup #3 / CardAuthorize" id="bdce8f15-c952-4200-937c-693582a6e125"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#20 / Setup #3 / CardAuthorize" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+	<SVC>CardAuthorize</SVC>
+	<PRJ>EHI</PRJ>
+	<STO>AIRPLUSGB</STO>
+	<CTY>GB</CTY>
+	<COM>Internet</COM>
+	<ORD>ORD4567890123</ORD>
+	<INV>INV4567890123</INV>
+	<CUR>GBP</CUR>
+	<NET>20.00</NET>
+	<TAX>0</TAX>
+	<GRS>20.00</GRS>
+	<CRD>
+		<PAN>122000201354654</PAN>
+		<EXP>0621</EXP>
+	</CRD>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 6" id="5d1c3a69-db6e-424e-93df-13d01d5df22c"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#20 / Setup #3 / CardAuthorize</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#21 / Setup #3 / Capture-notification of a pre-authorization #20</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#21 / Setup #3 / Capture-notification of a pre-authorization #20" id="97091f37-c3ef-40d1-b94c-95d97d085c8b"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#21 / Setup #3 / Capture-notification of a pre-authorization #20" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+<SVC>Capture</SVC>
+<PRJ>EHI</PRJ>
+<XRF>CFPQC5KQW0TC1</XRF>
+<CUR>GBP</CUR>
+<CTY>GB</CTY>
+<NET>16</NET>
+<TAX>0</TAX>
+<GRS>16</GRS>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>Service succeeded</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 7" id="b8e071ec-7b61-4b8e-8b7a-8caa1446fa7e"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#21 / Setup #3 / Capture-notification of a pre-authorization #20</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#22 / Setup #3 / Refund of a captured-authorization #21 - not supported</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#22 / Setup #3 / Refund of a captured-authorization #21 - not supported" id="b90063ac-da54-4871-893b-4c5d65c9ee35"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#22 / Setup #3 / Refund of a captured-authorization #21 - not supported" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+<SVC>Refund</SVC>
+<PRJ>EHI</PRJ>
+<XRF>J3QR3FAC72TC5</XRF>
+<CUR>GBP</CUR>
+<CTY>GB</CTY>
+<NET>16</NET>
+<TAX>0</TAX>
+<GRS>16</GRS>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>declined</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer 8" id="2d9358b4-e822-4f77-a2f8-6c8fadbb6886"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>xid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>TC#21 / Setup #3 / Capture-notification of a pre-authorization #20</con:sourceStep><con:sourcePath>//TRX/XID</con:sourcePath><con:targetType>Request</con:targetType><con:targetStep>TC#23 / Setup #3 / UnrestrictedRefund of a captured-authorization #21 - not supported</con:targetStep><con:targetPath>//TRX/XRF</con:targetPath><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="TC#23 / Setup #3 / UnrestrictedRefund of a captured-authorization #21 - not supported" id="ad95683b-5e02-4a78-b81d-45a2345bb170"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" id="8b77a642-ccfa-4b04-8fac-b6766ec290d7" name="TC#23 / Setup #3 / UnrestrictedRefund of a captured-authorization #21 - not supported" postQueryString="false" mediaType="application/xml" sslKeystore="PS6-PP.p12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#TestSuite#preprod}</con:endpoint><con:request><![CDATA[<TRX>
+<SVC>UnrestrictedRefund</SVC>
+<PRJ>EHI</PRJ>
+<XRF>J3QR3FAC72TC5</XRF>
+<CUR>GBP</CUR>
+<CTY>GB</CTY>
+<NET>16</NET>
+<TAX>0</TAX>
+<GRS>16</GRS>
+</TRX>]]></con:request><con:assertion type="Simple Contains" id="b7829fff-3ec7-4f6e-b733-d73e407f522c" name="Contains"><con:configuration><token>10004</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties/></con:testCase><con:properties><con:property><con:name>preprod</con:name><con:value>https://ips-preprod.payments.goacoustic.com:50443/trx</con:value></con:property></con:properties></con:testSuite><con:properties/><con:wssContainer><con:crypto><con:source>C:/Users/JustasKamara_63bg8nq/OneDrive - Acoustic L.P/IPG/CERTS/DEV-03.p12.pfx</con:source><con:password>passw0rd</con:password><con:type>KEYSTORE</con:type></con:crypto><con:crypto><con:source>C:/Users/JustasKamara_63bg8nq/OneDrive - Acoustic L.P/IPG/CERTS/PS6-PP.p12</con:source><con:password>passw0rd</con:password><con:type>KEYSTORE</con:type></con:crypto></con:wssContainer><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
